@@ -95,7 +95,10 @@ Depois executar o comando.
 aws cloudfront create-distribution --distribution-config file://<NOME_DA_CONFIG_JSON> --output json > distribution-output.json
 ```
 
-Para facilitar o entendimento farei via o passo a passo na console.
+Para facilitar o entendimento farei o passo a passo na console.
+Escolhendo o S3 como origem.
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/aa957850-57f9-4251-9183-0211a7ecf68b)
+
 
 
 ### Criando a chave rsa publica e privada e exemplos
