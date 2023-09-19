@@ -108,6 +108,50 @@ Para evitar custos não é necessário habilitar o Shield, WAF, Standard logging
 
 
 ### Criando a chave rsa publica e privada e exemplos
+Para gerar as chaves publica e privada devemos executar o seguinte comando no bash:
+```bash
+openssl rsa -pubout -int cloudfront-test-key.pem -out cloudfront-test-key.pub
+```
+Exemplos do output: 
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAyU2eOqzOjeu5TxNShbRcXV3wshxSxo0Fk7GZvNdb33dXb9VC
+8c4vVrnByp7ET7H1a8OqRqZU7B8c9chSOVpPa0NVhrV7PZEy7ukk6ks/Ch4iuSf+
+/Zfzu90nB/BTU7UJE3oI0rZ2fnkDd2Xes6wE9IKSSGfa6NbIUK+0aWwg8Y2jxUR7
+wxDYT2R+7NWwqPb5aPc08VmzScBDGgdhLnVlxSk3DT1ArQZfAjEHkLTPxe/GEDit
+CmHDLoBMvQwe9kPQ8RDXstPUuG7Z/AA+zLDDxaubvPQVxDw8RreqlOOlPI/Q/E7S
+roBjbOBVFagZNF9Ehn3Bilf7QPBAjcQ1caohFwIDAQABAoIBAQCm2vFWjTpApKzb
+AJccQF12/pCt8ZAjB20h+MoHnzKFzfPpvIlayJ6wchRRkLwDmuxkQLD5EpG9jiSB
+DWQqKdM+g3d2yyK1646ePR3eHjTIfCYn9yECrlrW0v6xM+C9t4coX7TEg31AY6od
+45BuuRz6VuhNn9fxu2YaiyktYPUFgfjZGE0Vf80SId10vEaNDLQDlY442648DMrM
+S5BHGg1s0ufcXx8cBr/FHmz/32pn6xR5OHWqbb3x/I7QMV/MtslFUnl0Efv6UxTn
+US9BTMxocnzFVSHTYZJ2nkjz8SPbEgkh2aepD9UU+vHIMghWRqLf3icfZ/fplhkR
+yHQJ+PAxAoGBAP9NZO4DVU/q9As7Cr7MZXZsz/ZMyrJqTqXpeA3QGTBjiW2dKYOJ
+tT8nwilRx2nlNNkbhLRLU5nknvldo2oV5Bh/Wpb6VzeFrzsa9I79j9E2l3c973c8
+hHVNw0eFr9JSLOgnzHWxhvNXQp/zAlAAaTpx4qq/0NRRoJ3vTMzrSjbzAoGBAMna
+cmOoFvvLt5FOT2k3kq9Pim/vYH5ydFfmOvxN3UkE/bAMrGl0dbRz7D4eS4lNGr27
+2tGIcEk913teusDuVHnoLfDWvpwQ1NTFXPoicqqBlj5NrVrE91eQlcJZDvjVHTCT
+bIleUi+CDcLYABF0qTo0Hn3ZZVjJhmvZahTwhH5NAoGAUHli4SunzqMu/gNEZdQj
+/2pZOzgFhKvB0sZ/E0uPRRN7FFQ/67iSqy+rIj8m7phTSkREVliQJ6hK/CuqARyZ
+Y6dxNLoAl/3JuIXMpO4EUVw17l5Vh25KCnfSoE7hlxhUE3HIHykwcrAEzkpZZkJa
+6RNQ8aW4+9QnHuF5gfaA1EUCgYAiIeg55dCNH3OZBI71EcqiDmcwal/8wcnemzXa
+OCh1Enz7agk1g9Xrf7axAlpvizQ8ZSmpSNMD74sid3BI84QhYRtzoDx3E3mJyR3h
+xjVxk5weSPBJawkQK4jHZlvbw929uxAdYm+vTOSaz/+i9AExsGJ/kWVL0DgEwKzp
+gYpF+QKBgCmLiXmMs8obISwK3h5cWrkEGBeJyt2BFDliddAxYGewnjkuFHO5jkje
+zmkYyDzFHNrwgD3TX0DL2pYkaZB2ejs93QHWLDw8WWpXsrnbzjXjyE3ZSVkhjX3n
+qx7d7LsTY4Z4oY3C/4kCc+eoaplREtd7ImsNiPCjtr7u9O5BOwzE
+-----END RSA PRIVATE KEY-----
+
+
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyU2eOqzOjeu5TxNShbRc
+XV3wshxSxo0Fk7GZvNdb33dXb9VC8c4vVrnByp7ET7H1a8OqRqZU7B8c9chSOVpP
+a0NVhrV7PZEy7ukk6ks/Ch4iuSf+/Zfzu90nB/BTU7UJE3oI0rZ2fnkDd2Xes6wE
+9IKSSGfa6NbIUK+0aWwg8Y2jxUR7wxDYT2R+7NWwqPb5aPc08VmzScBDGgdhLnVl
+xSk3DT1ArQZfAjEHkLTPxe/GEDitCmHDLoBMvQwe9kPQ8RDXstPUuG7Z/AA+zLDD
+xaubvPQVxDw8RreqlOOlPI/Q/E7SroBjbOBVFagZNF9Ehn3Bilf7QPBAjcQ1caoh
+FwIDAQAB
+-----END PUBLIC KEY-----
+
 ### Configurando a chave no CloudFront
 ### Diferença entre CannedSignedURL e CustomSignedURL
 ### Criando a aplicação 
