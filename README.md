@@ -15,12 +15,14 @@ O que você vai encontrar nesse material:
 - Fontes
 
 ### Objetivo
+
 Em alguns cenários precisamos disponiblizar um arquivo dentro de repositório privado na AWS garantido a segurança e controle de acesso. O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utlizando o CloudFront e apresentar alguns detalhes técnicos dessa funcionalidade.
     
 ### Diferença entre a url pré assinada Cloudfront e a url pré assinada do S3
 
 
 ### Componentes necessários na AWS
+
 Para essa prova de conceito é necessário: 
 - Conta aws (freetier)
 - Configurar uma distribuição CloudFront
@@ -31,6 +33,7 @@ Para essa prova de conceito é necessário:
 Agora que já sabemos o que precisa ser feito, mão na massa!!!
 
 ### Criando o Bucket S3
+
 Para criar o bucket na aws podemos utilizar a console (https://s3.console.aws.amazon.com/s3/bucket/create?region=sa-east-1) ou utilizando cli 
 ```bash
 aws s3api create-bucket --bucket <NOME_DO_BUCKET> --region <NOME_DA_REGIÃO>
@@ -44,6 +47,7 @@ aws s3 cp <CAMINHO_DO_ARQUIVO_LOCAL> s3://<NOME_DO_BUCKET>/<CAMINHO_NO_BUCKET>
 Observação: Foi utilizando a criptografia SSE-S3 e todos os objetos do bucket estão com acesso bloqueado ao público. Podemos disponibilizar arquivos de outras origens além do S3, por exemplo EC2 ou ECS.
 
 ### Criando o CloudFront
+
 Via cli temos que criar um json com as especificações. conforme o exemplo abaixo.
 ```json
 {
@@ -103,6 +107,7 @@ Para facilitar o entendimento farei via o passo a passo na console.
 ### Implementação do CustomSignedURL
 
 ### Fontes
+
 https://www.udemy.com/course/aws-certified-developer-associate-dva-c01
 https://www.youtube.com/watch?v=NTOCzsn7b4A
 
