@@ -96,9 +96,15 @@ aws cloudfront create-distribution --distribution-config file://<NOME_DA_CONFIG_
 ```
 
 Para facilitar o entendimento farei o passo a passo na console.
+
 Escolhendo o S3 como origem.
 ![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/aa957850-57f9-4251-9183-0211a7ecf68b)
 
+Restringindo o acesso do bucket somente para o CloudFront
+
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/5ad9607f-415c-49f9-ace7-a9f82141a2fc)
+
+Para evitar custos não é necessário habilitar o Shield, WAF, Standard logging e o price class utilizar a opção *Use only North America and Europe*.
 
 
 ### Criando a chave rsa publica e privada e exemplos
