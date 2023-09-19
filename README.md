@@ -24,7 +24,7 @@ Em alguns cenários precisamos disponiblizar um arquivo dentro de repositório p
 ### Componentes necessários na AWS
 
 Para essa prova de conceito é necessário: 
-- Conta aws (freetier)
+- Conta aws (free tier)
 - Configurar uma distribuição CloudFront
 - Configurar um Bucket S3
 - Upload Arquivo de teste (.jpg)
