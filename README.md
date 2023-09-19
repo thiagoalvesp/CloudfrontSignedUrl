@@ -1,4 +1,4 @@
-# Utilizando a URL pré assinada do cloudfront 
+# Utilizando a URL pré assinada do CloudFront 
 
 O que você vai encontrar nesse material:
 - Objetivo
@@ -15,7 +15,8 @@ O que você vai encontrar nesse material:
 - Fontes
 
 ### Objetivo
-    Em alguns cenários precisamos disponiblizar um arquivo dentro de repositório privado na AWS garantido a segurança e controle de acesso. O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utlizando o CloudFront e apresentar alguns detalhes técnicos dessa funcionalidade.
+    Em alguns cenários precisamos disponiblizar um arquivo dentro de repositório privado na AWS garantido a segurança e controle de acesso. 
+O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utlizando o CloudFront e apresentar alguns detalhes técnicos dessa funcionalidade.
     
 ### Diferença entre a url pré assinada Cloudfront e a url pré assinada do S3
 ### Componentes necessários na AWS
