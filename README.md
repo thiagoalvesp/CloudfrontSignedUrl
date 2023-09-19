@@ -106,6 +106,29 @@ Restringindo o acesso do bucket somente para o CloudFront
 
 Para evitar custos não é necessário habilitar o Shield, WAF, Standard logging e o price class utilizar a opção *Use only North America and Europe*.
 
+Também é necessário criar um policy do bucket para liberar o uso no cloudfront.
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::[nome_bucket]/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::[id_conta]:distribution/[id_distribution]"
+                }
+            }
+        }
+    ]
+}
+```
 
 ### Criando a chave rsa publica e privada e exemplos
 Para gerar as chaves publica e privada devemos executar o seguinte comando no bash:
