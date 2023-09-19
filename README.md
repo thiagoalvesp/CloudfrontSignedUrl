@@ -23,14 +23,14 @@ Para essa prova de conceito é necessário uma conta aws (freetier), configurar 
 
 ### Criando o Bucket S3
 Para criar o bucket na aws podemos utilizar a console (https://s3.console.aws.amazon.com/s3/bucket/create?region=sa-east-1) ou utilizando cli 
-'''
+```bash
 aws s3api create-bucket --bucket <NOME_DO_BUCKET> --region <NOME_DA_REGIÃO>
-''''
+```
 
 Para o upload podemos utilizar o cli ou a console.
-'''
+```
 aws s3 cp <CAMINHO_DO_ARQUIVO_LOCAL> s3://<NOME_DO_BUCKET>/<CAMINHO_NO_BUCKET>
-'''
+```
 
 Observação: Foi utilizando a criptografia SSE-S3 e todos os objetos do bucket estão com acesso bloqueado ao público.
 
