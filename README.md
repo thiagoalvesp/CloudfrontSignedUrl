@@ -6,7 +6,7 @@ O que você vai encontrar nesse material:
 - Componentes necessários na AWS
 - Criando o Bucket S3
 - Criando o CloudFront
-- Criando a chave rsa publica e privada e exemplos
+- Criando a chave rsa publica e privada 
 - Configurando a chave no CloudFront
 - Diferença entre CannedSignedURL e CustomSignedURL
 - Utilizando o SDK AWS .Net
@@ -16,7 +16,7 @@ O que você vai encontrar nesse material:
 
 ### Objetivo
 
-Em alguns cenários precisamos disponiblizar um arquivo dentro de repositório privado na AWS garantido a segurança e controle de acesso. O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utlizando o CloudFront e apresentar alguns detalhes técnicos dessa funcionalidade.
+Em alguns cenários precisamos disponibilizar arquivos de um repositório privado de forma temporária na AWS garantido a segurança e controle de acesso. O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utilizando a funcionalidade url pré assinada do CloudFront.
     
 ### Diferença entre a url pré assinada Cloudfront e a url pré assinada do S3
 
@@ -34,12 +34,12 @@ Agora que já sabemos o que precisa ser feito, mão na massa!!!
 
 ### Criando o Bucket S3
 
-Para criar o bucket na aws podemos utilizar a console (https://s3.console.aws.amazon.com/s3/bucket/create?region=sa-east-1) ou utilizando cli 
+Para criar o bucket na aws podemos utilizar a console (https://s3.console.aws.amazon.com/s3/bucket/create?region=sa-east-1) ou utilizando CLI. 
 ```bash
 aws s3api create-bucket --bucket <NOME_DO_BUCKET> --region <NOME_DA_REGIÃO>
 ```
 
-Para o upload podemos utilizar o cli ou a console.
+Para o upload podemos utilizar o CLI ou a console.
 ```
 aws s3 cp <CAMINHO_DO_ARQUIVO_LOCAL> s3://<NOME_DO_BUCKET>/<CAMINHO_NO_BUCKET>
 ```
@@ -48,7 +48,7 @@ Observação: Foi utilizando a criptografia SSE-S3 e todos os objetos do bucket 
 
 ### Criando o CloudFront
 
-Via cli temos que criar um json com as especificações. conforme o exemplo abaixo.
+Via CLI temos que criar um json com as especificações. conforme o exemplo abaixo.
 ```json
 {
   "Comment": "Minha distribuição do CloudFront",
@@ -136,6 +136,19 @@ Para gerar as chaves publica e privada devemos executar o seguinte comando no ba
 openssl rsa -pubout -int cloudfront-test-key.pem -out cloudfront-test-key.pub
 ```
 Exemplos do output: 
+```
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyU2eOqzOjeu5TxNShbRc
+XV3wshxSxo0Fk7GZvNdb33dXb9VC8c4vVrnByp7ET7H1a8OqRqZU7B8c9chSOVpP
+a0NVhrV7PZEy7ukk6ks/Ch4iuSf+/Zfzu90nB/BTU7UJE3oI0rZ2fnkDd2Xes6wE
+9IKSSGfa6NbIUK+0aWwg8Y2jxUR7wxDYT2R+7NWwqPb5aPc08VmzScBDGgdhLnVl
+xSk3DT1ArQZfAjEHkLTPxe/GEDitCmHDLoBMvQwe9kPQ8RDXstPUuG7Z/AA+zLDD
+xaubvPQVxDw8RreqlOOlPI/Q/E7SroBjbOBVFagZNF9Ehn3Bilf7QPBAjcQ1caoh
+FwIDAQAB
+-----END PUBLIC KEY-----
+```
+
+```
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAyU2eOqzOjeu5TxNShbRcXV3wshxSxo0Fk7GZvNdb33dXb9VC
 8c4vVrnByp7ET7H1a8OqRqZU7B8c9chSOVpPa0NVhrV7PZEy7ukk6ks/Ch4iuSf+
@@ -163,20 +176,21 @@ gYpF+QKBgCmLiXmMs8obISwK3h5cWrkEGBeJyt2BFDliddAxYGewnjkuFHO5jkje
 zmkYyDzFHNrwgD3TX0DL2pYkaZB2ejs93QHWLDw8WWpXsrnbzjXjyE3ZSVkhjX3n
 qx7d7LsTY4Z4oY3C/4kCc+eoaplREtd7ImsNiPCjtr7u9O5BOwzE
 -----END RSA PRIVATE KEY-----
+```
 
-
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyU2eOqzOjeu5TxNShbRc
-XV3wshxSxo0Fk7GZvNdb33dXb9VC8c4vVrnByp7ET7H1a8OqRqZU7B8c9chSOVpP
-a0NVhrV7PZEy7ukk6ks/Ch4iuSf+/Zfzu90nB/BTU7UJE3oI0rZ2fnkDd2Xes6wE
-9IKSSGfa6NbIUK+0aWwg8Y2jxUR7wxDYT2R+7NWwqPb5aPc08VmzScBDGgdhLnVl
-xSk3DT1ArQZfAjEHkLTPxe/GEDitCmHDLoBMvQwe9kPQ8RDXstPUuG7Z/AA+zLDD
-xaubvPQVxDw8RreqlOOlPI/Q/E7SroBjbOBVFagZNF9Ehn3Bilf7QPBAjcQ1caoh
-FwIDAQAB
------END PUBLIC KEY-----
+Não utizar as chaves de exemplo!!!
 
 ### Configurando a chave no CloudFront
+
+
 ### Diferença entre CannedSignedURL e CustomSignedURL
+
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/6037d9d2-5874-470b-b0c7-7a4b02c467dc)
+
+A Abordagem custom fornece mais opções de configurações como por exemplo inicio do uso da url e a restrição por ip além de ser possivel utilizar a mesma url para diversos arquivos porém a url gerada é maior pois leva as policy em base64, conforme podemos ver abaixo:
+
+`https://d1w1uj9kqe1ebe.cloudfront.net/narutoperfil.jpg?Expires=1694740255&Signature=FnhGvpj-zs11d~V2b8X82~uh09rrHnSuSNvfmrpXrk5ms7ulWvXpwp2x7vyLE5kd34Pq9mle5JNGb~i2XpjrqunwITMeogCSyAscdwYZWS0sSKztNs48cmpHP~fk5Zw1fpnE-2H3A6Q63htvaFw-ujquN-hKiS2vfSlqWDC0fO7R03yGfwo1tGdvxUufT6NC55BpsyHUSepDGI5VDx4a7Cyo~hBuW3m~0OCO~MMvpj6G-RTY0qYjWj2AgfmeRvkVZy~o6Z2McwTkaxk~lojWp-ZR5o5kJjYgk2gu9Q2bDqv1ntaTSn7EKPZL3a07yWHPJz2ShbZ~~Q0wYEnhCTeV4g__&Key-Pair-Id=K2FBX61W5Y2MOL`
+
 ### Criando a aplicação 
 ### Utilizando o SDK AWS .Net
 ### Implementação do CannedSignedURL
