@@ -17,10 +17,11 @@ O que você vai encontrar nesse material:
 
 ### Objetivo
 
-Em alguns cenários precisamos disponibilizar arquivos de um repositório privado de forma temporária na AWS garantido a segurança e controle de acesso. O Objetivo dessa prova de conceito é apresentar como podemos fazer isso utilizando a funcionalidade url pré assinada do CloudFront.
+Em alguns cenários precisamos disponibilizar arquivos de um repositório privado de forma temporária garantido a segurança e controle de acesso. O objetivo dessa prova de conceito é apresentar como podemos fazer isso utilizando a funcionalidade url pré assinada do CloudFront.
     
 ### Diferença entre a url pré assinada Cloudfront e a url pré assinada do S3
 
+Antes de iniciar é valido lembra que o S3 possui uma funcionalidade parecida que é focada nos objetos de forma granular(criar, alterar e download) enquanto o CloudFront foca na distribuição de conteúdo não se limitando ao S3 como origem.
 
 ### Componentes necessários na AWS
 
@@ -107,7 +108,7 @@ Restringindo o acesso do bucket somente para o CloudFront
 
 Para evitar custos não é necessário habilitar o Shield, WAF, Standard logging e o price class utilizar a opção *Use only North America and Europe*.
 
-Também é necessário criar um policy do bucket para liberar o uso no cloudfront.
+Também é necessário criar uma policy do bucket para liberar o uso no cloudfront.
 ```json
 {
     "Version": "2008-10-17",
@@ -196,13 +197,16 @@ E por fim atribuir esse grupo as restrições de acesso do Cloudfront nos compor
 
 ![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/334c126b-bbc0-486d-908c-b60c354333cb)
 
+Existem a opção de atribuir a chave na conta IAM porém não é recomendado.
 
 ### Diferença entre CannedSignedURL e CustomSignedURL
 
 
 ![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/6037d9d2-5874-470b-b0c7-7a4b02c467dc)
 
-A Abordagem custom fornece mais opções de configurações como por exemplo inicio do uso da url e a restrição por ip além de ser possivel utilizar a mesma url para diversos arquivos porém a url gerada é maior pois leva as policy em base64, conforme podemos ver abaixo:
+A Abordagem custom fornece mais opções de configurações, como por exemplo inicio do uso da url e restrição por ip, além de ser possivel utilizar a mesma url para diversos arquivos.
+
+A url gerada é maior pois leva as policy em base64, conforme podemos ver abaixo:
 
 `https://d1w1uj9kqe1ebe.cloudfront.net/narutoperfil.jpg?Expires=1694740255&Signature=FnhGvpj-zs11d~V2b8X82~uh09rrHnSuSNvfmrpXrk5ms7ulWvXpwp2x7vyLE5kd34Pq9mle5JNGb~i2XpjrqunwITMeogCSyAscdwYZWS0sSKztNs48cmpHP~fk5Zw1fpnE-2H3A6Q63htvaFw-ujquN-hKiS2vfSlqWDC0fO7R03yGfwo1tGdvxUufT6NC55BpsyHUSepDGI5VDx4a7Cyo~hBuW3m~0OCO~MMvpj6G-RTY0qYjWj2AgfmeRvkVZy~o6Z2McwTkaxk~lojWp-ZR5o5kJjYgk2gu9Q2bDqv1ntaTSn7EKPZL3a07yWHPJz2ShbZ~~Q0wYEnhCTeV4g__&Key-Pair-Id=K2FBX61W5Y2MOL`
 
@@ -213,11 +217,11 @@ Para criar a aplicação podemos executar o seguinte comando:
 dotnet new console --framework netcoreapp3.1
 ```
 
-a chave privada (arquivo .pem) deve estar acessivel para aplicação.
+A chave privada (arquivo .pem) deve estar acessivel para aplicação.
 
 ### Utilizando o SDK AWS .Net
 
-Para interagir com o CloudFront podemos utilizar o SDK, para instalar o pacote basta executar o seguinte comando:
+Para interagir com o CloudFront podemos utilizar o SDK AWS, para instalar o pacote basta executar o seguinte comando:
 ```
 dotnet add package AWSSDK.CloudFront --version 3.7.201.32
 ```
@@ -260,6 +264,7 @@ using (StreamReader reader = File.OpenText(System.IO.Path.GetFullPath("cloudfron
 
 ### Conclusão
 
+Fica claro que com poucas linhas de código e algumas configurações podemos implementar uma camada de acesso/segurança sofisticada no CloudFront.
     
 
 ### Fontes
