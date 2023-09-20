@@ -131,6 +131,7 @@ Também é necessário criar um policy do bucket para liberar o uso no cloudfron
 ```
 
 ### Criando a chave rsa publica e privada e exemplos
+
 Para gerar as chaves publica e privada devemos executar o seguinte comando no bash:
 ```bash
 openssl rsa -pubout -int cloudfront-test-key.pem -out cloudfront-test-key.pub
@@ -178,12 +179,13 @@ qx7d7LsTY4Z4oY3C/4kCc+eoaplREtd7ImsNiPCjtr7u9O5BOwzE
 -----END RSA PRIVATE KEY-----
 ```
 
-Não utizar as chaves de exemplo!!!
+Não utilizar as chaves de exemplo!!!
 
 ### Configurando a chave no CloudFront
 
 
 ### Diferença entre CannedSignedURL e CustomSignedURL
+
 
 ![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/6037d9d2-5874-470b-b0c7-7a4b02c467dc)
 
@@ -192,9 +194,56 @@ A Abordagem custom fornece mais opções de configurações como por exemplo ini
 `https://d1w1uj9kqe1ebe.cloudfront.net/narutoperfil.jpg?Expires=1694740255&Signature=FnhGvpj-zs11d~V2b8X82~uh09rrHnSuSNvfmrpXrk5ms7ulWvXpwp2x7vyLE5kd34Pq9mle5JNGb~i2XpjrqunwITMeogCSyAscdwYZWS0sSKztNs48cmpHP~fk5Zw1fpnE-2H3A6Q63htvaFw-ujquN-hKiS2vfSlqWDC0fO7R03yGfwo1tGdvxUufT6NC55BpsyHUSepDGI5VDx4a7Cyo~hBuW3m~0OCO~MMvpj6G-RTY0qYjWj2AgfmeRvkVZy~o6Z2McwTkaxk~lojWp-ZR5o5kJjYgk2gu9Q2bDqv1ntaTSn7EKPZL3a07yWHPJz2ShbZ~~Q0wYEnhCTeV4g__&Key-Pair-Id=K2FBX61W5Y2MOL`
 
 ### Criando a aplicação 
+
+Para criar a aplicação podemos executar o seguinte comando:
+```
+dotnet new console --framework netcoreapp3.1
+```
+
+a chave privada (arquivo .pem) deve estar acessivel para aplicação.
+
 ### Utilizando o SDK AWS .Net
+
+Para interagir com o CloudFront podemos utilizar o SDK, para instalar o pacote basta executar o seguinte comando:
+```
+dotnet add package AWSSDK.CloudFront --version 3.7.201.32
+```
+
 ### Implementação do CannedSignedURL
+```c#
+var protocol = AmazonCloudFrontUrlSigner.Protocol.https;
+var distributionDomain =  "d1w1uj9kqe1ebe.cloudfront.net";
+var resourcePath = "narutoperfil.jpg";
+var keyPairId = "K2FBX61W5Y2MOL";
+var expiresOn = DateTime.Now.AddSeconds(45);
+
+using (StreamReader reader = File.OpenText(System.IO.Path.GetFullPath("cloudfront-test-key.pem")))
+{
+       var text =   AmazonCloudFrontUrlSigner.GetCannedSignedURL(protocol, distributionDomain, reader, resourcePath, keyPairId, expiresOn);
+       Console.WriteLine("CannedSignedURL");
+       Console.WriteLine(text);
+       Console.WriteLine("----------------------------------");
+}
+```
+
 ### Implementação do CustomSignedURL
+```c#
+var protocol = AmazonCloudFrontUrlSigner.Protocol.https;
+var distributionDomain =  "d1w1uj9kqe1ebe.cloudfront.net";
+var resourcePath = "narutoperfil.jpg";
+var keyPairId = "K2FBX61W5Y2MOL";
+var expiresOn = DateTime.Now.AddSeconds(45);
+var ipRange = "2804:1b3:a200:9dc7:cfc:d226:d38:7dff";
+
+
+using (StreamReader reader = File.OpenText(System.IO.Path.GetFullPath("cloudfront-test-key.pem")))
+{
+       var text =   AmazonCloudFrontUrlSigner.GetCustomSignedURL(protocol,distributionDomain, reader, resourcePath, keyPairId, expiresOn, ipRange);
+       Console.WriteLine("CustomSignedURL");
+       Console.WriteLine(text);
+       Console.WriteLine("----------------------------------");
+}
+```
 
 ### Fontes
 
