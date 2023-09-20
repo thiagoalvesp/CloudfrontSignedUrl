@@ -12,6 +12,7 @@ O que você vai encontrar nesse material:
 - Utilizando o SDK AWS .Net
 - Implementação do CannedSignedURL
 - Implementação do CustomSignedURL
+- Conclusão
 - Fontes
 
 ### Objetivo
@@ -183,6 +184,18 @@ Não utilizar as chaves de exemplo!!!
 
 ### Configurando a chave no CloudFront
 
+Primeiro precisamos registrar a nossa chave publica no Cloudfront.
+
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/22e312ea-4882-48f7-bfed-fbe8a859ae3f)
+
+Depois precisamos atribuir essa chave a um grupo.
+
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/911a4ce0-fdb1-41b1-8e23-781aef4eca50)
+
+E por fim atribuir esse grupo as restrições de acesso do Cloudfront nos comportamentos.
+
+![image](https://github.com/thiagoalvesp/CloudfrontSignedUrl/assets/10868308/334c126b-bbc0-486d-908c-b60c354333cb)
+
 
 ### Diferença entre CannedSignedURL e CustomSignedURL
 
@@ -245,8 +258,13 @@ using (StreamReader reader = File.OpenText(System.IO.Path.GetFullPath("cloudfron
 }
 ```
 
+### Conclusão
+
+    
+
 ### Fontes
 
-https://www.udemy.com/course/aws-certified-developer-associate-dva-c01
-https://www.youtube.com/watch?v=NTOCzsn7b4A
+- https://www.udemy.com/course/aws-certified-developer-associate-dva-c01
+- https://www.youtube.com/watch?v=NTOCzsn7b4A
+- https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html
 
